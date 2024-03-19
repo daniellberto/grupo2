@@ -1,0 +1,44 @@
+const int BotonIngreso = D5;
+const int BotonEgreso = D6;
+const int LedVerde = D7;
+const int LedRojo = D8;
+
+
+int cuposDisponibles = 10; 
+int valorRecaudado = 0;
+
+void setup() {
+  pinMode(BotonIngreso, INPUT);
+  pinMode(BotonEgreso, INPUT);
+  pinMode(LedVerde, OUTPUT);
+  pinMode(LedRojo, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  
+  if (cuposDisponibles > 0) {
+    digitalWrite(LedVerde, HIGH);
+    digitalWrite(LedRojo, LOW);
+  } else {
+    digitalWrite(LedVerde, LOW); 
+    digitalWrite(LedRojo, HIGH);
+  }
+
+  
+  if (digitalRead(BotonIngreso) == LOW && cuposDisponibles > 0) {
+    cuposDisponibles--;
+    Serial.println("Vehículo ingresó al parqueadero.");
+  }
+
+ 
+  if (digitalRead(BotonEgreso) == LOW && cuposDisponibles < 10) {
+    cuposDisponibles++;
+    valorRecaudado += 5; 
+    Serial.print("Vehículo salió del parqueadero. Valor recaudado: ");
+    Serial.print(valorRecaudado);
+    Serial.println(" 000 COP");
+  }
+
+  delay(100); 
+}
