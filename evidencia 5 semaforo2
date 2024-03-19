@@ -1,0 +1,62 @@
+int rojo = D3;
+int azul = D1;
+int verde = D2;
+int botonp = D5;
+int titileo = D6;
+
+void setup() {
+  // put your setup code here, to run once:
+pinMode(rojo,OUTPUT);
+pinMode(azul,OUTPUT);
+pinMode(verde,OUTPUT);
+pinMode(botonp, INPUT);
+pinMode(titileo, INPUT) ;
+pinMode(A0,INPUT);
+
+}
+
+
+void loop()
+{
+  // put your main code here, to run repeatedly:
+int pot;
+
+pot = map(analogRead(A0),13,1024,1,100);
+  if(!digitalRead(botonp)) {
+    digitalWrite(rojo,LOW);
+    digitalWrite(azul,LOW);
+    digitalWrite(verde,LOW);
+  }else{
+  
+if(!digitalRead(titileo)){
+    digitalWrite(azul,HIGH);
+    delay(50*pot);
+     digitalWrite(azul,LOW);
+    delay(50*pot);
+  }
+ 
+else{
+
+
+  
+digitalWrite(rojo,HIGH);// ROJO
+digitalWrite(azul,LOW);// AMARILLO
+digitalWrite(verde,LOW);// VERDE
+delay(50*pot);
+digitalWrite(rojo,HIGH);// ROJO
+digitalWrite(azul,HIGH);// AMARILLO
+digitalWrite(verde,LOW);// VERDE
+delay(10*pot);
+digitalWrite(rojo,LOW);// ROJO
+digitalWrite(azul,LOW);// AMARILLO
+digitalWrite(verde,HIGH);// VERDE
+delay(30*pot);
+digitalWrite(rojo,LOW);// ROJO
+digitalWrite(azul,HIGH);// AMARILLO
+digitalWrite(verde,LOW);// VERDE
+delay(10*pot);
+}
+  }
+
+
+}
